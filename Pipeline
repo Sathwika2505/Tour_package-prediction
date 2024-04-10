@@ -1,0 +1,37 @@
+pipeline{
+    agent any
+    stages{
+        stage("Loading the data"){
+            steps{
+                sh 'python3 data_extraction.py'
+            }
+        }
+        stage("Analysing the data"){
+            steps{
+                sh 'python3 data_analysis.py'
+            }}
+        stage("cleansing the data"){
+            steps{
+                sh 'python3 data_preprocessing.py'
+            }}
+        stage("Data visualization"){
+            steps{
+                sh 'python3 datavisualization.py'
+            }}
+        stage("Feature Engineering"){
+            steps{
+                sh 'python3 feature_engineering.py'
+            }}
+
+        stage("Preparing your artifact"){
+            steps{
+                sh 'python3 preparing_dataset.py'
+            }}
+    }
+     post{
+       
+        always {
+            archiveArtifacts artifacts: 'Travel_package_purchase_prediction.csv', onlyIfSuccessful: true
+        }
+            }
+}
