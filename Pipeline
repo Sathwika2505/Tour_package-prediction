@@ -22,11 +22,6 @@ pipeline{
             steps{
                 sh 'python3 feature_engineering.py'
             }}
-
-        stage("Preparing your artifact"){
-            steps{
-                sh 'python3 preparing_dataset.py'
-            }}
     }
      post{
        
